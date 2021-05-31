@@ -1,0 +1,22 @@
+.bg-azulLogo{background-color: rgb(37,44,125);}
+.bg-rojoLogo{background-color: rgb(216,67,14);}
+#demoCSS:hover{background-color: rgb(76, 77, 167); color: honeydew;}
+#repuCSS:hover{background-color: rgb(202, 70, 70); color: honeydew;}
+#bothCSS:hover{background-color: rgb(196, 35, 169); color: honeydew;}
+
+#logo{height:13vh;}
+table{text-align: center;}
+#mailIcon{height: 10vh;}
+#checkBoxDiv{text-align: center;}
+#selector{width:25vw;margin-left:37%;}
+#indeDCSS:hover{background-color: rgb(222, 224, 97);}
+#divTabla{height: 30vh;}
+h2{text-align: center;}
+h3{text-align: center;}
+#secondLogo{width: 50%; height:50%;}
+.accordion{width:50%;}
+#mitad{width:50%;}
+#tableDivider{background-color: black;}
+
+#tableLeast{height: 40vh;}
+#tableMost{height: 40vh;}

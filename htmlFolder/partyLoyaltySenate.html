@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TGIF | Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="icon" href="../imgs/icon.ico" sizes="16x16" type="image/png">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div id="wrapper">
+        <header class="d-flex flex-column">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex">
+                    <img id="logo" src="../imgs/logoTGIF.jpg" alt="tgif_logo">
+                    <h1 class="mt-3 ps-2">TGIF</h1>
+                </div>
+                <div class="pe-5 mt-2">
+                    <img id="mailIcon" src="../imgs/mailIcon.png" alt="mail_icon" class="align-middle">
+                    <a href="info@tgif.net" class="align-middle">info@tgif.net</a>
+                </div>
+            </div>
+            <nav class="navbar navbar-expand-lg navbar-light bg-azulLogo">
+                <div class="container-fluid">
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active text-light" aria-current="page" href="index.html">Home</a>
+                      </li>
+
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Congress 113
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="congress113Senate.html">Senate</a></li>
+                          <li><a class="dropdown-item" href="congress113House.html">House</a></li>
+                        </ul>
+                      </li>
+
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Attendance
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                          <li><a class="dropdown-item" href="attendanceSenate.html">Senate</a></li>
+                          <li><a class="dropdown-item" href="attendanceHouse.html">House</a></li>
+                        </ul>
+                      </li>
+
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Party Loyalty
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                          <li><a class="dropdown-item" href="">Senate</a></li>
+                          <li><a class="dropdown-item" href="partyLoyaltyHouse.html">House</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+        </header>
+        <main id="app">
+            <div id="container" class="d-flex flex-column ms-5 mt-3 me-5">
+                <div class="d-flex flex-row">
+                    <div id="mitad" class="me-5">
+                        <h2>Party Loyalty</h2>
+                        <p class="mt-3">Those who consider themselves to be strong partisans, strong Democrats and strong Republicans respectively, tend to be the most faithful in voting for their party's nominee for office and legislation that backs their party's agenda.</p>
+                    </div>
+                    <div class="ms-5">
+                        <h2>Senate at a glance</h2>
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Party</th>
+                              <th scope="col">Number of Reps</th>
+                              <th scope="col">% Voted with party</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr v-for="party in statistics">
+                              <td>{{party.partyName}}</td>
+                              <td>{{party.quantity}}</td>
+                              <td>{{party.percentageVotedWParty}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="d-flex flex-row mt-3 mb-5">
+                    <div>
+                        <h2>Least Loyal (Bottom 10% of Party)</h2>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Number of Party Votes</th>
+                                    <th>% Party Votes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <tr v-for="member in statistics[3].leastLoyalOfThem">
+                                <td>{{member.first_name}} {{member.middle_name || ""}} {{member.last_name}}</td>
+                                <td>{{numberOfPartyVotes(member.total_votes,member.votes_with_party_pct)}}</td>
+                                <td>{{member.votes_with_party_pct}}</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="tableDivider" class="mx-5 rounded-pill">i</div>
+                    <div>
+                        <h2>Most Loyal (Bottom 10% of Party)</h2>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                  <th>Name</th>
+                                  <th>Number of Party Votes</th>
+                                  <th>% Party Votes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <tr v-for="member in statistics[3].mostLoyalOfThem">
+                                <td>{{member.first_name}} {{member.middle_name || ""}} {{member.last_name}}</td>
+                                <td>{{numberOfPartyVotes(member.total_votes,member.votes_with_party_pct)}}</td>
+                                <td>{{member.votes_with_party_pct}}</td>
+                              </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="card bg-rojoLogo">
+          <div class="card-body">
+              <p class="text-light d-flex flex-row-reverse pe-5 pt-4">2021 TGIF  |  All Rights Reserved</p>
+          </div>
+        </footer>
+    </div>
+    <script src="../jsFolder/states.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="../jsFolder/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+</body>
+</html>
